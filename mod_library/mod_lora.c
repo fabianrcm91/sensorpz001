@@ -16,7 +16,7 @@ uint8_t sx1278Init(uint32_t frf){
 #endif
 
     ///Puede cambiar y usar UCA0
-    spiUCB0Init(FIRST_CAPTURE + IDDLE_LOW + MSB_FIRST + MODE_MASTER + DATA_8BITS, 16);
+    spiUCB0Init(FIRST_CAPTURE + IDDLE_LOW + MSB_FIRST + MODE_MASTER + DATA_8BITS,DCO_frec_MHz*2);
 
     uint8_t version=0;
     version = sx1278RegRead(REG_VERSION);

@@ -1,11 +1,15 @@
+#include "mod_library/mod_pins_io.h"
 #include "mod_libs.h"
+#include "mod_user_defs.h"
+#include "msp430g2553.h"
+#include <stdint.h>
 
 
 int main(void) {
-//    WDTCTL = WDTPW + WDTHOLD + WDTNMI + WDTNMIES;
-//    IE1 |= NMIIE;
-//    P1DIR = 0;P2DIR = 0;P3DIR = 0;
-//    __delay_cycles(1000000);
+    WDTCTL = WDTPW + WDTHOLD + WDTNMI + WDTNMIES;
+    IE1 |= NMIIE;
+    P1DIR = 0;P2DIR = 0;P3DIR = 0;
+    __delay_cycles(1000000);
 
     loadBasicSetUp();
 
@@ -13,11 +17,27 @@ int main(void) {
     pinModeOutput(LedS2);
     pinDigLow(LedS1);
     pinDigLow(LedS2);
+  
 
-    uartSetup(baudrate_115200,DATA_8BITS+PARITY_DIS+STOP_1BIT);
-    uartPuts("\n\r Testing Uart...\n\r");
+
+
+
+
+    uartSetup(baudrate_9600,DATA_8BITS+PARITY_DIS+STOP_1BIT);
+    uartPuts("\n\r Testing Uart2...");
     delay_ms(10);
-
+    uint8_t i=0;
+/*
+    bitLow(P1DIR,0b11110000);
+    bitHigh(P1REN,0b11110000);
+    for (i=5; i>0; i--){
+        __delay_cycles(500000*DCO_frec_MHz);
+        bitToggle(P1OUT,0b11110000);
+        bitToggle(P3OUT,BIT4+BIT5);
+        uartPuts(" .");
+    }
+*/
+    uartPuts(" Testing Finished...\n\r");
     sr04Init();
 
     radioInit(7094272, 1);//7094272/0.016384=433000000

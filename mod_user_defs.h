@@ -11,7 +11,7 @@
 #include "mod_library/mod_pins_io.h"
 
 
-#define DCO_frec_MHz  16
+#define DCO_frec_MHz  1
 
 
 
